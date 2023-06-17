@@ -9,7 +9,7 @@ import (
 func TestSetDefaultTime(t *testing.T) {
 	test := Alarm{}
 	t.Run("setDefaultTime test", func(t *testing.T) {
-		test.setDefaultTime(time.Date(2000, 1, 1, 12, 1, 1, 1, time.FixedZone("Asia/Tokyo", 9*60*60)))
+		test.SetDefaultTime(time.Date(2000, 1, 1, 12, 1, 1, 1, time.FixedZone("Asia/Tokyo", 9*60*60)))
 		time_expected := time.Date(2000, 1, 1, 12, 1, 0, 0, time.FixedZone("Asia/Tokyo", 9*60*60))
 		if test.time.Unix() != time_expected.Unix() {
 			str := "defaultTime\n"
@@ -37,7 +37,7 @@ func TestTimeIncrement(t *testing.T) {
 		if i == 0 {
 			t.Run("minute increment test", func(t *testing.T) {
 				expected := time.Date(2000, 1, 1, 12, 1, 0, 0, time.FixedZone("Asia/Tokyo", 9*60*60))
-				test.timeIncrement()
+				test.TimeIncrement()
 				if test.time.Equal(expected) == false {
 					str := "timeIncrement(minute)\n"
 					str += fmt.Sprintf("%d\n", test.time.Unix())
@@ -48,7 +48,7 @@ func TestTimeIncrement(t *testing.T) {
 		} else if i == 1 {
 			t.Run("hour increment test", func(t *testing.T) {
 				expected := time.Date(2000, 1, 1, 13, 0, 0, 0, time.FixedZone("Asia/Tokyo", 9*60*60))
-				test.timeIncrement()
+				test.TimeIncrement()
 				if test.time.Equal(expected) == false {
 					str := "timeIncrement(hour)\n"
 					str += fmt.Sprintf("%d\n", test.time.Unix())
@@ -77,7 +77,7 @@ func TestTimeDecrement(t *testing.T) {
 		if i == 0 {
 			t.Run("minute Decrement test", func(t *testing.T) {
 				expected := time.Date(2000, 1, 1, 11, 59, 0, 0, time.FixedZone("Asia/Tokyo", 9*60*60))
-				test.timeDecrement()
+				test.TimeDecrement()
 				if test.time.Equal(expected) == false {
 					str := "timeDecrement(minute)\n"
 					str += fmt.Sprintf("%d\n", test.time.Unix())
@@ -88,7 +88,7 @@ func TestTimeDecrement(t *testing.T) {
 		} else if i == 1 {
 			t.Run("hour Decrement test", func(t *testing.T) {
 				expected := time.Date(2000, 1, 1, 11, 0, 0, 0, time.FixedZone("Asia/Tokyo", 9*60*60))
-				test.timeDecrement()
+				test.TimeDecrement()
 				if test.time.Equal(expected) == false {
 					str := "timeDecrement(hour)\n"
 					str += fmt.Sprintf("%d\n", test.time.Unix())
@@ -110,7 +110,7 @@ func TestAlarmOn(t *testing.T) {
 		alarmRinging_expected := true
 		func_expected := 1
 		func_testdata := 0
-		test.alarmOnIfTimeMatched(time.Date(2000, 1, 1, 12, 0, 0, 0, time.FixedZone("Asia/Tokyo", 9*60*60)), func() { func_testdata = 1 })
+		test.AlarmOnIfTimeMatched(time.Date(2000, 1, 1, 12, 0, 0, 0, time.FixedZone("Asia/Tokyo", 9*60*60)), func() { func_testdata = 1 })
 		if test.ringing != alarmRinging_expected {
 			str := "alarmRinging test\n"
 			str += fmt.Sprintf("%T\n", test.ringing)
@@ -136,7 +136,7 @@ func TestAlarmOff(t *testing.T) {
 		alarmRinging_expected := false
 		func_expected := 1
 		func_testdata := 0
-		test.alarmOff(func() { func_testdata = 1 })
+		test.AlarmOff(func() { func_testdata = 1 })
 		if test.ringing != alarmRinging_expected {
 			str := "alarmRinging test\n"
 			str += fmt.Sprintf("%T\n", test.ringing)
@@ -157,7 +157,7 @@ func TestAdjustDay(t *testing.T) {
 		time: time.Date(2000, 1, 1, 12, 0, 0, 0, time.FixedZone("Asia/Tokyo", 9*60*60)),
 	}
 	t.Run("timeAdjustDay test", func(t *testing.T) {
-		test.adjustDay(time.Date(2001, 2, 2, 13, 1, 1, 1, time.FixedZone("Asia/Tokyo", 9*60*60)))
+		test.AdjustDay(time.Date(2001, 2, 2, 13, 1, 1, 1, time.FixedZone("Asia/Tokyo", 9*60*60)))
 		time_expected := time.Date(2001, 2, 2, 12, 0, 0, 0, time.FixedZone("Asia/Tokyo", 9*60*60))
 		if test.time.Unix() != time_expected.Unix() {
 			str := "AdjustDay test\n"
