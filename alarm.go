@@ -55,6 +55,11 @@ func (a *Alarm) AdjustDay(t_now time.Time) {
 	a.time = time.Date(t_now.Year(), t_now.Month(), t_now.Day(), a.time.Hour(), a.time.Minute(), a.time.Second(), 0, t_now.Location())
 }
 
+// selectorTime に値を設定する
+func (a *Alarm) SetSelectorTime(value int) {
+	a.selectorTime = value
+}
+
 // Alarm構造体のメンバ変数にアクセスするためのメソッド
 func (a *Alarm) GetStatusRinging() bool {
 	return a.ringing

@@ -167,3 +167,19 @@ func TestAdjustDay(t *testing.T) {
 		}
 	})
 }
+
+func TestSetSelectorTime(t *testing.T) {
+	test := Alarm{
+		selectorTime: 0,
+	}
+	t.Run("alarmOn test", func(t *testing.T) {
+		test.SetSelectorTime(1)
+		func_expected := 1
+		if test.selectorTime != func_expected {
+			str := "setSelectorTime test\n"
+			str += fmt.Sprintf("%T\n", test.selectorTime)
+			str += fmt.Sprintf("%T\n", func_expected)
+			t.Errorf(str)
+		}
+	})
+}
