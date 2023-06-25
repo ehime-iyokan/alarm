@@ -54,3 +54,14 @@ func (a *Alarm) AlarmOff(funcAlarmOff func()) {
 func (a *Alarm) AdjustDay(t_now time.Time) {
 	a.time = time.Date(t_now.Year(), t_now.Month(), t_now.Day(), a.time.Hour(), a.time.Minute(), a.time.Second(), 0, t_now.Location())
 }
+
+// Alarm構造体のメンバ変数にアクセスするためのメソッド
+func (a *Alarm) GetStatusRinging() bool {
+	return a.ringing
+}
+func (a *Alarm) GetStatusSelectorTime() int {
+	return a.selectorTime
+}
+func (a *Alarm) GetTime() time.Time {
+	return a.time
+}
