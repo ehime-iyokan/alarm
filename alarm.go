@@ -3,12 +3,12 @@ package alarm
 import "time"
 
 type Alarm struct {
-	time         time.Time
+	time         time.Time // 時間は [ns] 単位では比較しないため、nsec には 0 を設定する
 	ringing      bool
 	selectorTime int // alarm.selectorTime = 0:秒調整, 1:時間調整
 }
 
-// デフォルトのアラーム時刻を設定する。second, ns は 0 が設定される
+// デフォルトのアラーム時刻を設定する。「？時：？分：0 秒」でアラームを鳴らすかを判定するため、 second は 0 を設定する
 func (a *Alarm) SetDefaultTime(t time.Time) {
 	a.time = time.Date(t.Year(), t.Month(), t.Day(), t.Hour(), t.Minute(), 0, 0, t.Location())
 }
